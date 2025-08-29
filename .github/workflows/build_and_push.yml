@@ -27,3 +27,8 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/devops-test:${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/devops-test:latest
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Hello world!
+        run: echo 123
