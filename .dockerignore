@@ -2,8 +2,6 @@ node_modules
 dist
 .prettierrc
 eslint.config.js
-tsconfig.json
-tsconfig.build.json
 test/        
 
 .git
