@@ -1,0 +1,26 @@
+version: '3.9'
+
+networks:
+  my-network:
+    driver: bridge
+
+services:
+  redis:
+    image: redis:alpine
+    container_name: redis
+    networks:
+      - my-network
+    restart: unless-stopped
+
+  devops-test:
+    image: devops-test
+    container_name: devops-test
+    ports:
+      - "3000:3000"
+    environment:
+      REDIS_HOST: redis
+    depends_on:
+      - redis
+    networks:
+      - my-network
+    restart: unless-stopped
