@@ -30,5 +30,14 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-      - name: Hello world!
-        run: echo 123
+      - name: Configure kubeconfig
+        run: |
+          echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 --decode > $HOME/.kube/config
+
+      - name: Deploy to Kubernetes
+        run: |
+          envsubst < k8s/nestapp-full.yaml | kubectl apply -f Kubernetes/
+        env:
+          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
+          REDIS_HOST: ${{ secrets.REDIS_HOST }}
+
