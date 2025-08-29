@@ -30,6 +30,8 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
+      - name: Checkout repo
+          uses: actions/checkout@v4
       - name: Configure kubeconfig
         run: |
           echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 --decode > $HOME/.kube/config
