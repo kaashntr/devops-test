@@ -36,7 +36,9 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
-          envsubst < k8s/nestapp-full.yaml | kubectl apply -f Kubernetes/
+          for file in kubernetes/*.yaml; do
+            envsubst < "$file" | kubectl apply -f -
+          done
         env:
           REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
           REDIS_HOST: ${{ secrets.REDIS_HOST }}
