@@ -37,7 +37,7 @@ jobs:
       - name: Deploy to Kubernetes
         run: |
           for file in kubernetes/*.yaml; do
-            envsubst < "$file" | kubectl apply -f -
+            envsubst < "$file" | minikube kubectl apply -f -
           done
         env:
           REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
