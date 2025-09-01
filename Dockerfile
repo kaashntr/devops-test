@@ -9,6 +9,7 @@ RUN npm run build
 FROM node:alpine
 WORKDIR /app
 COPY package*.json ./
+RUN apk add curl
 RUN npm ci --only=production
 COPY --from=build /app/dist ./dist
 RUN adduser -D nestapp
